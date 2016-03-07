@@ -109,3 +109,7 @@ $RECYCLE.BIN/
 *.lnk
 *.pdf
 .ipynb_checkpoints/customer_segments-checkpoint.ipynb
+*.zip
+customer_segments.aux
+*.out
+*.png

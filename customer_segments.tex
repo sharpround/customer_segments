@@ -1,0 +1,924 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{customer\_segments}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Creating Customer Segments}\label{creating-customer-segments}
+
+    In this project you, will analyze a dataset containing annual spending
+amounts for internal structure, to understand the variation in the
+different types of customers that a wholesale distributor interacts
+with.
+
+Instructions:
+
+\begin{itemize}
+\tightlist
+\item
+  Run each code block below by pressing \textbf{Shift+Enter}, making
+  sure to implement any steps marked with a TODO.
+\item
+  Answer each question in the space provided by editing the blocks
+  labeled ``Answer:''.
+\item
+  When you are done, submit the completed notebook (.ipynb) with all
+  code blocks executed, as well as a .pdf version (File \textgreater{}
+  Download as).
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Import libraries: NumPy, pandas, matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sns}
+        
+        \PY{c+c1}{\PYZsh{} Tell iPython to include plots inline in the notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Read dataset}
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wholesale\PYZhy{}customers.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dataset has \PYZob{}\PYZcb{} rows, \PYZob{}\PYZcb{} columns}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{o}{*}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{k}{print} \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} print the first 5 rows}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Mean:}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print} \PY{n}{data}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Standard deviation:}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print} \PY{n}{data}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Dataset has 440 rows, 6 columns
+   Fresh  Milk  Grocery  Frozen  Detergents\_Paper  Delicatessen
+0  12669  9656     7561     214              2674          1338
+1   7057  9810     9568    1762              3293          1776
+2   6353  8808     7684    2405              3516          7844
+3  13265  1196     4221    6404               507          1788
+4  22615  5410     7198    3915              1777          5185
+
+Mean:
+Fresh               12000.297727
+Milk                 5796.265909
+Grocery              7951.277273
+Frozen               3071.931818
+Detergents\_Paper     2881.493182
+Delicatessen         1524.870455
+dtype: float64
+
+Standard deviation:
+Fresh               12647.328865
+Milk                 7380.377175
+Grocery              9503.162829
+Frozen               4854.673333
+Detergents\_Paper     4767.854448
+Delicatessen         2820.105937
+dtype: float64
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} normalize each feature}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.preprocessing} \PY{k+kn}{import} \PY{n}{MaxAbsScaler}
+        \PY{n}{scaler} \PY{o}{=} \PY{n}{MaxAbsScaler}\PY{p}{(}\PY{p}{)}
+        \PY{n}{data\PYZus{}scaled} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data} \PY{o}{\PYZhy{}} \PY{n}{data}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{print} \PY{n}{data\PYZus{}scaled}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.00667696  0.05701086 -0.00460077 -0.0494477  -0.00546819 -0.00402581]
+ [-0.04935859  0.05928554  0.01905867 -0.02266433  0.01084468  0.00541016]
+ [-0.056388    0.04448533 -0.00315079 -0.0115392   0.01672153  0.13613495]
+ [ 0.01262799 -0.06794901 -0.04397422  0.05765116 -0.0625764   0.00566868]
+ [ 0.1059873  -0.00570541 -0.00887998  0.01458669 -0.02910735  0.07885129]
+ [-0.02583404  0.03637623 -0.03330567 -0.04162723 -0.02863299 -0.00159141]
+ [ 0.00125513 -0.03836336 -0.01150881 -0.04484539  0.00681258 -0.02110965]
+ [-0.04414645 -0.01241129  0.01738471 -0.02427341  0.01158258  0.02242937]
+ [-0.06028213 -0.03173133 -0.02073917 -0.04579699 -0.03071492 -0.01669327]
+ [-0.05985278  0.07823631  0.1288446  -0.03309739  0.11973768  0.01234711]]
+    \end{Verbatim}
+
+    \subsection{Feature Transformation}\label{feature-transformation}
+
+    \textbf{1)} In this section you will be using PCA and ICA to start to
+understand the structure of the data. Before doing any computations,
+what do you think will show up in your computations? List one or two
+ideas for what might show up as the first PCA dimensions, or what type
+of vectors will show up as ICA dimensions.
+
+    Answer:
+
+For the first PCA component, I think we will see ``fresh'' and ``milk''
+have the same sign, and relatively magnitude large. Customers interested
+in one perishable item is likely interested in others.
+
+I believe that all the other dimensions would also have the sign, as
+more spending in one category would likely be associated with higher
+spending in others.
+
+Finally, I think that it is clear that the magnitude of ``fresh'' will
+be clearly be much larger than the others.
+
+    \subsubsection{PCA}\label{pca}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} TODO: Apply PCA with the same number of dimensions as variables in the dataset}
+        \PY{n}{n\PYZus{}features} \PY{o}{=} \PY{n}{data\PYZus{}scaled}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{n}{data\PYZus{}scaled}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{n\PYZus{}components} \PY{o}{=} \PY{n}{n\PYZus{}features}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.decomposition} \PY{k+kn}{import} \PY{n}{PCA}
+        \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{n\PYZus{}components}\PY{p}{)}
+        \PY{n}{data\PYZus{}pca} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data\PYZus{}scaled}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Print the components and the amount of variance in the data contained in each dimension}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PCA components:}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print} \PY{n}{pca}\PY{o}{.}\PY{n}{components\PYZus{}}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{explained variance:}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print} \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{cumulative explained variance:}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PCA components:
+[[ -2.01256748e-02   4.90848222e-01   5.82012008e-01  -1.72017139e-02
+    6.43116310e-01   7.76563979e-02]
+ [ -8.91062148e-01  -1.71130905e-01   4.56375604e-04  -3.56368970e-01
+    1.15793870e-01  -1.90565448e-01]
+ [  4.51377269e-01  -3.69724766e-01   9.44625098e-02  -6.69049162e-01
+    2.39047016e-01  -3.81927658e-01]
+ [ -2.97656925e-02  -6.40258287e-01   2.06433605e-01   6.14293858e-01
+    3.44491604e-01  -2.24804554e-01]
+ [  9.70182335e-03   4.26414968e-01  -2.13791280e-01   2.18266341e-01
+   -2.30762701e-02  -8.50997490e-01]
+ [ -2.96924947e-02  -3.64065401e-02   7.51010722e-01  -9.01871261e-03
+   -6.29795789e-01  -1.92488291e-01]]
+
+explained variance:
+[ 0.51762627  0.27336241  0.10304974  0.06064994  0.03250552  0.01280611]
+
+cumulative explained variance:
+[ 0.51762627  0.79098868  0.89403842  0.95468837  0.98719389  1.        ]
+    \end{Verbatim}
+
+    \textbf{2)} How quickly does the variance drop off by dimension? If you
+were to use PCA on this dataset, how many dimensions would you choose
+for your analysis? Why?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{component}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{explained variance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{variance explained by each PCA component}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{1.1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{number of components}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{explained variance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{variance explained by given number of PCA components}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} <matplotlib.text.Text at 0xace1208>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{customer_segments_files/customer_segments_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{customer_segments_files/customer_segments_10_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Answer:
+
+The explained variance falls off rather quickly after the first two
+components which, between them, capture 79.1\% of the variance in the
+normalized data.
+
+If I were to use PCA on this dataset, how many components I would use
+would vary depending on what I was trying to do. There are so few
+dimensions that I don't believe that I would throw any of them away, and
+use the full set. Unless I start running into computational issues, I
+don't see any reason to reduce the dimension.
+
+That said, if I \emph{did} start running into computational issues, and
+I need my algorithms to run more efficiently, then I would absolutely
+keep the first two dimensions. I would compare the results from using
+two dimensions to those from using three and four dimensions, though, to
+see what the right balance is. If my clusters change significantly
+between using 2 dimensions and 3 dimensions, then perhaps there is some
+important information in that third dimension, even though it represents
+much less of the total variation. Honestly, I doubt that fourth
+dimension will make a difference, but I don't see a reason not to check.
+
+Unless we want to create tens or hundreds of market segments (which we
+do not even have the data to do), the last 2.3\% of variance that the
+fifth and sixth dimensions capture should not matter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} X\PYZus{}reduced = np.dot(pca.components\PYZus{}, np.transpose(data.as\PYZus{}matrix()))}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{component 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{component 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt\PYZus{}axis1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{square}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{component 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{component 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt\PYZus{}axis2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{square}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{data\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{component 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{component 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt\PYZus{}axis3} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{square}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{customer_segments_files/customer_segments_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{customer_segments_files/customer_segments_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{customer_segments_files/customer_segments_12_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fresh  Milk  Grocery  Frozen  Detergents\PYZus{}Paper  Delicatessen}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{} Print the independent components}
+        \PY{k}{print} \PY{n}{pca}\PY{o}{.}\PY{n}{components\PYZus{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fresh  Milk  Grocery  Frozen  Detergents\_Paper  Delicatessen
+[[ -2.01256748e-02   4.90848222e-01   5.82012008e-01  -1.72017139e-02
+    6.43116310e-01   7.76563979e-02]
+ [ -8.91062148e-01  -1.71130905e-01   4.56375604e-04  -3.56368970e-01
+    1.15793870e-01  -1.90565448e-01]
+ [  4.51377269e-01  -3.69724766e-01   9.44625098e-02  -6.69049162e-01
+    2.39047016e-01  -3.81927658e-01]
+ [ -2.97656925e-02  -6.40258287e-01   2.06433605e-01   6.14293858e-01
+    3.44491604e-01  -2.24804554e-01]
+ [  9.70182335e-03   4.26414968e-01  -2.13791280e-01   2.18266341e-01
+   -2.30762701e-02  -8.50997490e-01]
+ [ -2.96924947e-02  -3.64065401e-02   7.51010722e-01  -9.01871261e-03
+   -6.29795789e-01  -1.92488291e-01]]
+    \end{Verbatim}
+
+    \textbf{3)} What do the dimensions seem to represent? How can you use
+this information?
+
+    Answer:
+
+The dimensions represent the directions in which the data varies. The
+first two components explain similar amounts of variance. The first
+points mostly in the ``milk-grocery-detergents\_paper'' direction, and
+the second points more-or-less in the ``fresh'' direction.
+
+Just by looking at these first two PCA components, we see that the
+customers tend to buy ``grocery'', ``frozen'', and ``detergents\_paper''
+together, and the ``fresh'' varies only loosely with any other
+categories.
+
+The data of most customers will lie near the plane defined by these
+first two vectors. As discussed above, we can project our data onto the
+first few PCA components in order to reduce the dimensionality of our
+data.
+
+Even if we do not use the components for dimension reduction for our
+computation and analysis, projecting onto the PCA components will allow
+us to visualize our data effectively without losing significant meaning.
+
+    \subsubsection{ICA}\label{ica}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{data\PYZus{}scaled}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{k}{print} \PY{n}{col}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-2.52323414688e-18
+0.0
+-8.07434927e-18
+3.28020439094e-18
+6.0557619525e-18
+5.04646829375e-19
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} TODO: Fit an ICA model to the data}
+        \PY{c+c1}{\PYZsh{} Note: Adjust the data to have center at the origin fi|rst!}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.decomposition} \PY{k+kn}{import} \PY{n}{FastICA}
+        
+        \PY{n}{ica} \PY{o}{=} \PY{n}{FastICA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{n\PYZus{}components}\PY{p}{,} \PY{n}{whiten}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+        
+        \PY{n}{ica}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data\PYZus{}scaled}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} data\PYZus{}ica = ica.fit\PYZus{}transform(data\PYZus{}scaled)}
+        
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fresh  Milk  Grocery  Frozen  Detergents\PYZus{}Paper  Delicatessen}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{} Print the independent components}
+        
+        \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{ica}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ica}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{component} \PY{o}{=} \PY{n}{ica}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+            \PY{n}{component} \PY{o}{/}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{norm}\PY{p}{(}\PY{n}{component}\PY{p}{)}
+            \PY{n}{A}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{component}
+        
+        \PY{k}{print} \PY{n}{A}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fresh  Milk  Grocery  Frozen  Detergents\_Paper  Delicatessen
+[[-0.12069627 -0.01378871  0.0925356   0.90437177 -0.02884341 -0.39744081]
+ [-0.03173331  0.18851928 -0.96019094 -0.02875319  0.15126655  0.1333361 ]
+ [-0.94572922  0.14112658  0.14881367  0.09230931 -0.20810688  0.10818749]
+ [ 0.01863745 -0.11539362 -0.6611499   0.05792844  0.71686982  0.17877282]
+ [-0.04696914 -0.01690646 -0.05980194 -0.02938046  0.02300923  0.9962626 ]
+ [ 0.01780038  0.74597989 -0.56571791 -0.02213078  0.15571617 -0.31372456]]
+    \end{Verbatim}
+
+    \textbf{4)} For each vector in the ICA decomposition, write a sentence
+or two explaining what sort of object or property it corresponds to.
+What could these components be used for?
+
+    Answer:
+
+We can imagine the ICA components to be the underlying purchasing
+behaviors that combine in different ways for each customer to create
+their purchases. We can take these as idealized customers or, more
+realistically, as the principle behaviors that sum to create each
+customer's buying history.
+
+For most of the components that we identify, we can make up explanations
+for what they mean. To relate the components to customer characteristics
+and motivations, however, we should talk to customers that strongly
+exhibit a given component to learn what their underlying reasons for
+their purchasing pattern is.
+
+\begin{itemize}
+\item
+  One component describes a tendency for \emph{frozen} to be purchased
+  in inverse to \emph{delicatessen}.
+\item
+  Another component describes a tendency to buy \emph{grocery}, with a
+  small tendency to buy less \emph{milk}, \emph{detergents\_paper} or
+  \emph{delicatessen}.
+\item
+  A third component describes a tendency to buy \emph{fresh} and a bit
+  of \emph{detergents\_paper} at the expense of the other categories.
+\item
+  A fourth component describes the tendency of \emph{grocery} and
+  \emph{detergents\_paper} to move opposite each other.
+\item
+  A fifth component is simply a lot of \emph{delicastessen} buying,
+  without any other categories varying significantly from the mean.
+  Perhaps this indicates that a customer has a meat counter or sells
+  sandwiches.
+\item
+  A sixth component describes a tendency for \emph{grocery} and
+  \emph{delicatessen} to be purchased together, but not with \emph{milk}
+  (and/or vice versa).
+\end{itemize}
+
+Technical note: To make discussion easier, we have fixed the random seed
+to get identical results with every test run. Even with a different
+random seed, though, these components are reliably reproduced with only
+small variations.
+
+    \subsection{Clustering}\label{clustering}
+
+In this section you will choose either K Means clustering or Gaussian
+Mixed Models clustering, which implements expectation-maximization. Then
+you will sample elements from the clusters to understand their
+significance.
+
+    \subsubsection{Choose a Cluster Type}\label{choose-a-cluster-type}
+
+\textbf{5)} What are the advantages of using K Means clustering or
+Gaussian Mixture Models?
+
+    Answer:
+
+K-Means clustering is relatively fast and robust. Perhaps its greatest
+advantage, however, is its simplicity and ease of use.
+
+    \textbf{6)} Below is some starter code to help you visualize some
+cluster data. The visualization is based on
+\href{http://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html}{this
+demo} from the sklearn documentation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Import clustering modules}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.cluster} \PY{k+kn}{import} \PY{n}{KMeans}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn.mixture} \PY{k+kn}{import} \PY{n}{GMM}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} TODO: First we reduce the data to two dimensions using PCA to capture variation}
+         \PY{n}{reduced\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}pca}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} print reduced\PYZus{}data.shape}
+         \PY{k}{print} \PY{n}{reduced\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}  \PY{c+c1}{\PYZsh{} print up to 10 elements}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.02219287  0.00204761]
+ [ 0.04897034  0.0421463 ]
+ [ 0.04266073  0.0227368 ]
+ [-0.09999572 -0.02851552]
+ [-0.02294883 -0.11706398]
+ [-0.01883103  0.02860184]
+ [-0.02204071  0.02623463]
+ [ 0.0145228   0.04718634]
+ [-0.04669431  0.07508106]
+ [ 0.19312925  0.06330953]]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} TODO: Implement your clustering algorithm here, and fit it to the reduced data for visualization}
+         \PY{c+c1}{\PYZsh{} The visualizer below assumes your clustering object is named \PYZsq{}clusters\PYZsq{}}
+         
+         \PY{n}{clusters} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{n\PYZus{}components}\PY{p}{)}
+         \PY{n}{clusters}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{reduced\PYZus{}data}\PY{p}{)}
+         \PY{k}{print} \PY{n}{clusters}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+KMeans(copy\_x=True, init='k-means++', max\_iter=300, n\_clusters=6L, n\_init=10,
+    n\_jobs=1, precompute\_distances='auto', random\_state=None, tol=0.0001,
+    verbose=0)
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Plot the decision boundary by building a mesh grid to populate a graph.}
+         \PY{n}{x\PYZus{}min}\PY{p}{,} \PY{n}{x\PYZus{}max} \PY{o}{=} \PY{n}{reduced\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{reduced\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.1}
+         \PY{n}{y\PYZus{}min}\PY{p}{,} \PY{n}{y\PYZus{}max} \PY{o}{=} \PY{n}{reduced\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{reduced\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.1}
+         \PY{n}{hx} \PY{o}{=} \PY{p}{(}\PY{n}{x\PYZus{}max}\PY{o}{\PYZhy{}}\PY{n}{x\PYZus{}min}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{1000.0}
+         \PY{n}{hy} \PY{o}{=} \PY{p}{(}\PY{n}{y\PYZus{}max}\PY{o}{\PYZhy{}}\PY{n}{y\PYZus{}min}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{1000.0}
+         \PY{n}{xx}\PY{p}{,} \PY{n}{yy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{x\PYZus{}min}\PY{p}{,} \PY{n}{x\PYZus{}max}\PY{p}{,} \PY{n}{hx}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{y\PYZus{}min}\PY{p}{,} \PY{n}{y\PYZus{}max}\PY{p}{,} \PY{n}{hy}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Obtain labels for each point in mesh. Use last trained model.}
+         \PY{n}{Z} \PY{o}{=} \PY{n}{clusters}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{xx}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yy}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \subsubsection{PCA components}\label{pca-components}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} TODO: Find the centroids for KMeans or the cluster means for GMM }
+         
+         \PY{n}{centroids} \PY{o}{=} \PY{n}{clusters}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+         \PY{k}{print} \PY{n}{centroids}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[-0.09167065  0.04647277]
+ [ 0.38622729  0.0555936 ]
+ [-0.06718846 -0.14533407]
+ [ 0.09541551  0.07147261]
+ [ 0.04255322 -0.61475489]
+ [ 1.09883618 -0.13543999]]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{pca}\PY{o}{.}\PY{n}{components\PYZus{}}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} array([[-0.0395652 , -0.0529493 , -0.05333221, -0.01498456, -0.05357363,
+                 -0.01597492],
+                [-0.05731044,  0.1800652 ,  0.22481429, -0.02645561,  0.25482647,
+                  0.0193988 ],
+                [ 0.13085391, -0.00810818, -0.03917082,  0.05294831, -0.06003879,
+                  0.02247804],
+                [-0.06560684,  0.03460336,  0.05556559, -0.02711193,  0.06963936,
+                 -0.00621058],
+                [ 0.5469284 ,  0.12609073,  0.02448593,  0.21834758, -0.04381818,
+                  0.12045557],
+                [ 0.09857063,  0.56253975,  0.63947404,  0.02936475,  0.69099635,
+                  0.11114184]])
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Put the result into a color plot}
+         \PY{n}{Z} \PY{o}{=} \PY{n}{Z}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{xx}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{clf}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{Z}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                    \PY{n}{extent}\PY{o}{=}\PY{p}{(}\PY{n}{xx}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{xx}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yy}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{yy}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{Paired}\PY{p}{,}
+                    \PY{n}{aspect}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{auto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{origin}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{reduced\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{reduced\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{centroids}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{169}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}
+                     \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Clustering on the wholesale grocery dataset (PCA\PYZhy{}reduced data)}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Centroids are marked with white cross}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{n}{x\PYZus{}min}\PY{p}{,} \PY{n}{x\PYZus{}max}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{n}{y\PYZus{}min}\PY{p}{,} \PY{n}{y\PYZus{}max}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{customer_segments_files/customer_segments_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{7)} What are the central objects in each cluster? Describe them
+as customers.
+
+    Answer:
+
+The centroids (denoted by the white ``x''s in the plot above), describe
+the ``average'' customer in each segment. In this case, they are less
+``clusters'' and more ``brackets''. That is to say, if we look at the
+scatter plot of the data, it looks like the customers do not bunch up
+naturally--all the clustering really does is split them up into brackets
+on the two dimensions. It may be useful to break the customers up into
+brackets for analysis or marketing, but it does not look like there is
+anything in the data suggesting that there is a ``natural'' clustering.
+
+    \subsubsection{Conclusions}\label{conclusions}
+
+** 8)** Which of these techniques did you feel gave you the most insight
+into the data?
+
+    Answer:
+
+For this analysis, I was particularly intrigued by the independent
+component analysis. If it can truly be interpreted as a set of
+independent, underlying behaviors that make up the overall purchasing of
+each customer, then the results are complex and intriguing. If we can
+determine the qualities of the customers that lead to each component,
+then we should be able to better design advertising, promotions,
+pricing, or even store layout in a way that better captures profitable
+behaviors and/or improves customer satisfaction.
+
+The principal component analysis was useful for reducing the number of
+features in our data, and it revealed a clear plane of maximal
+variation. There are perhaps some business insights that can be teased
+out of that--e.g.~why do ``milk'', ``grocery'' and ``detergents\_paper''
+vary together? And why does ``fresh'' tend to vary less with categories?
+
+The clustering we have tried so far seems simply like a convenient way
+of describing our data. It does not reveal any clear patterns in the
+data.
+
+    \textbf{9)} How would you use that technique to help the company design
+new experiments?
+
+    Answer:
+
+The challenge with our results from ICA is that we do not know exactly
+how they are meaningful descriptions of the customers. What we should do
+is find the customers that most strongly exhibit certain behaviors and
+look at what they buy and why. As an analogy to the cocktail problem,
+this would be like moving your microphone as close as possible to one of
+the sources in order to figure out what that particular source sounds
+like.
+
+We can identify those customers readily enough (see below). Now we have
+to gather the data that it will take to extract a bit more meaning.
+
+A simple experiment that the store can do is start to tweak promotions
+to see whether you can manipulate these findings. For example, if you
+offer a good deal or a sale on \emph{grocery} and get an increase in
+volume, do you see a corresponding increase in \emph{detergents\_paper}?
+
+Given that all the customers are a mix of these maximally independent
+components, it would be useful to figure out what, if anything, causes
+these components. To work towards answering that, I would try to look at
+the data on individual transactions. A simple hypothesis is that each
+component represents a certain kind of purchasing
+experience--e.g.~restocking the freezers, or restocking the dry goods.
+If this is true, then we may expect individual transactions to resemble
+the ICA components more closely than customers' aggregate behavior.
+
+If individual shopping experiences do resemble the ICA components, then
+more interesting experiments may involve the layout of the store.
+Perhaps you can increase the sale of a specific \emph{detergents\_paper}
+product by moving it closer to the \emph{fresh} section. Or maybe you
+could streamline a customer's buying by putting \emph{grocery} and
+\emph{delicatessen} close to each other, or separate them in order to
+get a customer to walk past many other products.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn.preprocessing} \PY{k+kn}{import} \PY{n}{normalize}
+         
+         \PY{n}{data\PYZus{}ica} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{data\PYZus{}scaled}\PY{p}{,} \PY{n}{A}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{the first 5 customers transformed into ICA space:}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{print} \PY{n}{normalize}\PY{p}{(}\PY{n}{data\PYZus{}ica}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{ica\PYZus{}argmax} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{data\PYZus{}ica}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{customers that are closest to a given ICA component:}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{print} \PY{n}{ica\PYZus{}argmax}
+         
+         \PY{k}{for} \PY{n}{arg} \PY{o+ow}{in} \PY{n}{ica\PYZus{}argmax}\PY{p}{:}
+             \PY{k}{print} \PY{n}{data\PYZus{}ica}\PY{p}{[}\PY{n}{arg}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+the first 5 customers transformed into ICA space:
+[[-0.66496818  0.22192501 -0.04162513 -0.16138984 -0.05449527  0.69124348]
+ [-0.23948077 -0.03793914  0.80718248 -0.19289797  0.09667301  0.4930626 ]
+ [-0.34326213  0.19864373  0.40246671  0.18320491  0.80374158 -0.03417251]
+ [ 0.72921302  0.28908425 -0.14137298 -0.05203623  0.0883614  -0.59512759]
+ [-0.25531134  0.08094842 -0.71543262  0.02135661  0.60517471 -0.22299576]]
+
+customers that are closest to a given ICA component:
+[325  85 181 109 183  86]
+[ 0.84961187 -0.06363904 -0.0521144  -0.01584994  0.0408402   0.03056852]
+[ 0.00633831 -0.6926364  -0.0139108  -0.00895968 -0.01731374  0.02708238]
+[ 0.03779946 -0.05917826 -0.85128754 -0.02165221  0.08497286  0.16814519]
+[ 0.01053522 -0.21562831  0.16357291 -0.23145837 -0.04527492 -0.01888835]
+[ 0.10377518  0.06621772  0.04246203  0.00674978  0.94785588  0.00595051]
+[-0.04096118 -0.02067286 -0.01869507  0.01855866 -0.04092857  0.66231924]
+    \end{Verbatim}
+
+    \textbf{10)} How would you use that data to help you predict future
+customer needs?
+
+    Answer:
+
+Most directly, the ICA components could inform premium or targeted
+services that address customer needs. For example, only one ICA
+component has a large \emph{frozen} component. If a customer has a
+significant score along that component, then they may be interested in
+related deals or announcements, regardless of the total volume of
+\emph{frozen} sales they actually have. And, if the wholesaler is
+interested in changing inventory, then those customers are likely the
+ones to care the most, and could be targeted for research.
+
+More indirectly, ICA components could be used as preprocessing for other
+analysis. If we plan to do regression or classification, the transformed
+data may yield more accurate predictions than the non-transformed data.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
